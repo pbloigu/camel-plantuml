@@ -27,7 +27,6 @@ public class DefaultExampleWithHostAndPortTest extends CamelTestSupport {
     public void testMock() throws Exception {
         MockEndpoint mock = getMockEndpoint("mock:camel-plantuml-output");
 
-
         mock.expectedBodiesReceived("@startuml\n" +
                 "\n" +
                 "skinparam ArrowColor #Black\n" +
@@ -126,9 +125,9 @@ public class DefaultExampleWithHostAndPortTest extends CamelTestSupport {
                 "@enduml\n");
 
         AdviceWith.adviceWith(context, "camel-plantuml-http-trigger", a -> {
-                    a.weaveAddLast().transform(a.body().regexReplaceAll("\r", ""));
-                    a.weaveAddLast().to("mock:camel-plantuml-output");
-                }
+            a.weaveAddLast().transform(a.body().regexReplaceAll("\r", ""));
+            a.weaveAddLast().to("mock:camel-plantuml-output");
+        }
         );
 
         context.start();
@@ -162,7 +161,7 @@ public class DefaultExampleWithHostAndPortTest extends CamelTestSupport {
                         .description("Route which transforms the message")
                         .transform(simple("${body}${body}"));
 
-                getContext().addRoutes(new CamelPlantUmlRouteBuilder("localhost", 9090));
+                getContext().addRoutes(new CamelPlantUmlRouteBuilder("localhost", 9091));
 
             }
 
